@@ -86,4 +86,14 @@ public class Contrat implements Serializable {
 	}
 	
 	
+	public int getId() {
+		return reference;
+	}
+	public void setId(int id) {
+		this.reference = id;
+	}
+	
+
+
+
 }

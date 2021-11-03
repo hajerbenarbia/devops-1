@@ -95,6 +95,10 @@ public class Employe implements Serializable {
 		this.role = role;
 	}
 	
+	public Employe(String nom) {
+		this.nom = nom;
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -186,6 +190,9 @@ public class Employe implements Serializable {
 		return "Employe [id=" + id + ", prenom=" + prenom + ", nom=" + nom + ", email=" + email + ", password="
 				+ password + ", actif=" + actif + ", role=" + role + "]";
 	}
+	
+
+
 	
 	
 	
