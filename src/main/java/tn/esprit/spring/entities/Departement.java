@@ -23,7 +23,7 @@ public class Departement implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	private String name;
+	private String  name;
 	
 	//@JsonManagedReference 
 	@JsonIgnore

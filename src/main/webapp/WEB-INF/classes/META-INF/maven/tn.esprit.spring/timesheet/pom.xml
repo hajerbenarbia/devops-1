@@ -157,22 +157,26 @@
 		</pluginManagement>
 		
 	</build>
-     <repositories> 
+
+	
+
+<repositories>
     <repository>
       <id>maven-group</id>
       <url>http://localhost:8081/nexus/content/groups/maven-group/</url>
     </repository>
-      </repositories>
+      </repositories> 
       	<distributionManagement>
     <snapshotRepository>
-      <id>nexus-snapshots</id>
+      <id>snapshots</id>
       <url>http://localhost:8081/nexus/content/repositories/snapshots/</url>
     </snapshotRepository>
     <repository> 
-      <id>nexus-releases</id>
+      <id>releases</id>
       <url>http://localhost:8081/nexus/content/repositories/releases/</url>
     </repository> 
      </distributionManagement>
-  
+
+
 
 </project>
