@@ -100,8 +100,8 @@ public class ContratServiceTest {
 	**/
 	@Test
 	public void testSupprimerContrat()
-	{
-		try{
+	{ 
+		 try{
 			l.info("In testSupprimerContrat():");
 			  Date date = new Date(0);
 			l.info("Je vais supprimer un contrat.");
