@@ -68,7 +68,7 @@ public class ContratServiceTest {
 	
 	
 
-
+/*
 	@Test
 	public void testAffecterContrat()
 	{
@@ -97,7 +97,7 @@ public class ContratServiceTest {
 		}catch (Exception e) { l.error("Erreur dans testAffecterContrat() : " + e); }
 	}
 	
-	
+	**/
 	@Test
 	public void testSupprimerContrat()
 	{
