@@ -16,13 +16,14 @@ import tn.esprit.spring.services.EntrepriseServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class EntrepriseServiceImplTest {
-private static final Logger l = (Logger) LogManager.getLogger(EntrepriseServiceImplTest.class);
+private static final Logger l = LogManager.getLogger(EntrepriseServiceImplTest.class);
 	
 	@Autowired
 	EntrepriseServiceImpl es;
@@ -40,7 +41,8 @@ private static final Logger l = (Logger) LogManager.getLogger(EntrepriseServiceI
 			Entreprise E = new Entreprise("MICROSOFT","MICROSOFT FRANCE");
 			l.info("Creation Entreprise.");
 			int id  = es.ajouterEntreprise(E);
-			assertNotNull(id);
+			boolean nullValue = id!=0;
+			assertTrue(nullValue);
 			l.info("Adding Entreprise.");
 			l.info("Id of the added Entreprise : "+id);
 			l.info("Deleting Entreprise.");
@@ -62,7 +64,8 @@ private static final Logger l = (Logger) LogManager.getLogger(EntrepriseServiceI
 			l.info("Adding a new  Entreprise.");
 			int Id = es.ajouterEntreprise(E);
 			l.info("Id of the added Entreprise : "+Id);
-			assertNotNull(Id);
+			boolean nullValue = Id!=0;
+			assertTrue(nullValue);
 			l.info("Deleting Entreprise.");
 			es.deleteEntrepriseById(Id);
 			l.info("Add Entreprise works");
@@ -145,8 +148,8 @@ private static final Logger l = (Logger) LogManager.getLogger(EntrepriseServiceI
 
 			int Id = es.ajouterEntreprise(E);
 			l.info("Id of the added Entreprise : "+Id);
-
-			assertNotNull(Id);
+			boolean nullValue = Id!=0;
+			assertTrue(nullValue);
 			l.info("Deleting Entreprise.");
 
 			es.deleteEntrepriseById(Id);
@@ -171,7 +174,9 @@ private static final Logger l = (Logger) LogManager.getLogger(EntrepriseServiceI
 		l.info("Affecting a Department to Enterprise");
 		es.affecterDepartementAEntreprise(IdD, IdE);
 		l.info("Getting the department with the id "+IdD);
-		Departement D1=drep.findById(IdD).get();
+			Optional<Departement> optionalDepartement=drep.findById(IdD);
+			if(optionalDepartement.isPresent()){
+		Departement D1=optionalDepartement.get();
 		l.info("D1 "+D1.getEntreprise().getId());
 		l.info("Testing if  enterprise_Id of the department is equal to the Id of the affected enterprise");
 		assertEquals(D1.getEntreprise().getId(),IdE);
@@ -179,10 +184,11 @@ private static final Logger l = (Logger) LogManager.getLogger(EntrepriseServiceI
 			es.deleteDepartementById(IdD);
 			l.info("Deleting Enterprise.");
 			es.deleteEntrepriseById(IdE);
-		l.info("Affect Department to Enterprise works");
+		l.info("Affect Department to Enterprise works");}
 		} catch (NullPointerException e) {
 			l.error(e.getMessage());
 		}
+
 	}
 	
 	@Test
