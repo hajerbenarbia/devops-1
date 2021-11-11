@@ -11,6 +11,8 @@
 	<groupId>tn.esprit.spring</groupId>
 	<artifactId>timesheet</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+		<packaging>war</packaging>
+
 	<name>timesheet</name>
 	<description>timesheet</description>
 
