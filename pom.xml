@@ -167,14 +167,10 @@
 	</repositories>
 	<distributionManagement>
 		<snapshotRepository>
-			<id>snapshots</id>
-			<url>http://localhost:8081/nexus/content/repositories/snapshots/</url>
+			<id>deploymentRepo</id>
+			<name>releases</name>
+			<url>http://localhost:8081/repository/maven-releases/</url>
 		</snapshotRepository>
-
-		<repository>
-			<id>releases</id>
-			<url>http://localhost:8081/nexus/content/repositories/releases/</url>
-		</repository>
 	</distributionManagement>
 
 
