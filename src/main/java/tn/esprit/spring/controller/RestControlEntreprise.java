@@ -29,16 +29,7 @@ public class RestControlEntreprise {
 	@Autowired
 	ITimesheetService itimesheetservice;
 	
-	// Ajouter Entreprise : http://localhost:8081/SpringMVC/servlet/ajouterEntreprise
-	//{"id":1,"name":"SSII Consulting","raisonSocial":"Cite El Ghazela"}
 
-	@PostMapping("/ajouterEntreprise")
-	@ResponseBody
-	public int ajouterEntreprise(@RequestBody Entreprise ssiiConsulting) {
-		ientrepriseservice.ajouterEntreprise(ssiiConsulting);
-		return ssiiConsulting.getId();
-	}
-	
 	// http://localhost:8081/SpringMVC/servlet/affecterDepartementAEntreprise/1/1
     @PutMapping(value = "/affecterDepartementAEntreprise/{iddept}/{identreprise}") 
 	public void affecterDepartementAEntreprise(@PathVariable("iddept")int depId, @PathVariable("identreprise")int entrepriseId) {
@@ -61,9 +52,8 @@ public class RestControlEntreprise {
 		return ientrepriseservice.getEntrepriseById(entrepriseId);
 	}
     
-    // http://localhost:8081/SpringMVC/servlet/ajouterDepartement
- 	//{"id":1,"name":"Telecom"}
-
+    
+ 	
  	@PostMapping("/ajouterDepartement")
  	@ResponseBody
 	public int ajouterDepartement(@RequestBody Departement dep) {
