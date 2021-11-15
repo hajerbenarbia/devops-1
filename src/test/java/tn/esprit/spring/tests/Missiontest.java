@@ -1,52 +1,63 @@
 package tn.esprit.spring.tests;
 
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
 import tn.esprit.spring.entities.Mission;
 import tn.esprit.spring.services.MissionServiceImpl;
 
-
 @SpringBootTest
-public class Missiontest {
+public class Missiontest{
 	
-	Mission M;
+	
 	@Autowired
 	MissionServiceImpl missionServiceImpl;
 	
 	
-	@Test
+	/**@Test
 	void deleteMissionById() {
-		System.out.println("Running testDelete...");
 		
-		missionServiceImpl.deleteMissionById(0);
+		missionServiceImpl.deleteMissionById(6);
 		assertNull("Mission deleted");
 		
-	}
+	}**/
 
 	
 	@Test
 	void getMissionNameById() {
 		
-		String name = missionServiceImpl.getMissionNameById(1);
+		String name = missionServiceImpl.getMissionNameById(7);
 		
-		assertTrue("error", name == null);
-		assertTrue("succefully", name != null);
+		org.junit.jupiter.api.Assertions.assertFalse(name=="");
+		org.junit.jupiter.api.Assertions.assertTrue(name!="");
 	}
+	
 	
 	@Test
 	void addMission() {
 		
-		int idMiss;
-	  idMiss = missionServiceImpl.ajouterMission(new Mission("imen","benabdlaziz"));
+	  Mission m = missionServiceImpl.ajouterMission(new Mission("mannouch","ma7lazinha"));
 		
-	  assertTrue("error", idMiss == 0);
-		assertTrue("succefully", idMiss != 0);
+	  assertThat(m.getId()).isGreaterThan(0);
 		
-		
-		
+	
 	}
+	
+	@Test
+	void updateMissionByName() {
+		
+	
+	Boolean Mission  =	 missionServiceImpl.updateMissionByName("salwa", 6);
+		
+	org.junit.jupiter.api.Assertions.assertFalse(Mission==false);
+	org.junit.jupiter.api.Assertions.assertTrue(Mission!=false);
+	}
+	
+	
 
 }

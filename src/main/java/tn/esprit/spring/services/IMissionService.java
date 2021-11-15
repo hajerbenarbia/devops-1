@@ -4,7 +4,8 @@ import tn.esprit.spring.entities.Mission;
 
 public interface IMissionService {
 	
-	public int ajouterMission(Mission mission);
+	public Mission ajouterMission(Mission mission);
 	public String deleteMissionById(int missionId);
 	public String getMissionNameById(int missionId);
-}
+	public Boolean updateMissionByName( String name, int missionId);
+	}

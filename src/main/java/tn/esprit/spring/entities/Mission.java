@@ -51,8 +51,8 @@ public class Mission implements Serializable {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public String setName(String name) {
+	return	this.name = name;
 	}
 
 	public String getDescription() {
@@ -78,6 +78,18 @@ public class Mission implements Serializable {
 	public void setTimesheets(List<Timesheet> timesheets) {
 		this.timesheets = timesheets;
 	}
+
+	@Override
+	public String toString() {
+		return "Mission [id=" + id + ", name=" + name + ", description=" + description + ", departement=" + departement
+				+ ", timesheets=" + timesheets + ", getId()=" + getId() + ", getName()=" + getName()
+				+ ", getDescription()=" + getDescription() + ", getDepartement()=" + getDepartement()
+				+ ", getTimesheets()=" + getTimesheets() + "]";
+	}
+
+	
+
+	
 	
 	
 
