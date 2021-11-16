@@ -2,7 +2,10 @@ package tn.esprit.spring.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +22,8 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
     EntrepriseRepository entrepriseRepoistory;
 	@Autowired
 	DepartementRepository deptRepoistory;
+	 Logger logger = LoggerFactory.getLogger(EntrepriseServiceImpl.class);
+
 	
 	public int ajouterEntreprise(Entreprise entreprise) {
 		entrepriseRepoistory.save(entreprise);
@@ -36,37 +41,61 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 				// ==> c'est l'objet departement(le master) qui va mettre a jour l'association
 				//Rappel : la classe qui contient mappedBy represente le bout Slave
 				//Rappel : Dans une relation oneToMany le mappedBy doit etre du cote one.
-				Entreprise entrepriseManagedEntity = entrepriseRepoistory.findById(entrepriseId).get();
-				Departement depManagedEntity = deptRepoistory.findById(depId).get();
+		Optional<Entreprise> entrepriseManagedEntity = entrepriseRepoistory.findById(entrepriseId);
+		Optional<Departement> depManagedEntity = deptRepoistory.findById(depId);
+		if ((entrepriseManagedEntity.isPresent()) && (depManagedEntity.isPresent())) {
+		Entreprise entreprise = entrepriseManagedEntity.get();
+		Departement departement = depManagedEntity.get();
 				
-				depManagedEntity.setEntreprise(entrepriseManagedEntity);
-				deptRepoistory.save(depManagedEntity);
+				departement.setEntreprise(entreprise);
+				deptRepoistory.save(departement);
 		
-	}
+	}}
 	
-	public List<String> getAllDepartementsNamesByEntreprise(int entrepriseId) {
-		Entreprise entrepriseManagedEntity = entrepriseRepoistory.findById(entrepriseId).get();
+	/**public List<String> getAllDepartementsNamesByEntreprise(int entrepriseId) {
+		Optional<Entreprise> entrepriseManagedEntity = entrepriseRepoistory.findById(entrepriseId);
+		if(!entrepriseManagedEntity.isPresent()) {
+			logger.error("No Entreprise exist !");
+			
+		}else {
+		
+		Entreprise entreprise =entrepriseManagedEntity.get();
 		List<String> depNames = new ArrayList<>();
-		for(Departement dep : entrepriseManagedEntity.getDepartements()){
+		for(Departement dep : entreprise.getDepartements()){
 			depNames.add(dep.getName());
 		}
 		
 		return depNames;
-	}
-
+	}**/
+	
 	@Transactional
 	public void deleteEntrepriseById(int entrepriseId) {
-		entrepriseRepoistory.delete(entrepriseRepoistory.findById(entrepriseId).get());	
-	}
+		Optional <Entreprise> entrprise= entrepriseRepoistory.findById(entrepriseId);
+		if(entrprise.isPresent()) {
+		Entreprise entrep =entrprise.get();
+		entrepriseRepoistory.delete(entrep);	
+	}}
 
 	@Transactional
 	public void deleteDepartementById(int depId) {
-		deptRepoistory.delete(deptRepoistory.findById(depId).get());	
-	}
+		Optional <Departement> departement= deptRepoistory.findById(depId);
+		if(departement.isPresent()) {
+			Departement deprt =departement.get();
+			deptRepoistory.delete(deprt);
+		}	}
 
 
 	public Entreprise getEntrepriseById(int entrepriseId) {
-		return entrepriseRepoistory.findById(entrepriseId).get();	
+		Optional<Entreprise> entr =entrepriseRepoistory.findById(entrepriseId);	
+		if (!entr.isPresent()) {
+			logger.error("No Entreprise exist !");
+			
+		}else {
+		Entreprise entreprise = entr.get();
+		logger.info(" entreprise exist ");
+		
+		return entreprise;
 	}
-
+		return null;
+		}
 }

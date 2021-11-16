@@ -37,7 +37,6 @@ public class Mission implements Serializable {
 		this.name = name;
 		this.description = description;
 	}
-	
 
 	public int getId() {
 		return id;
@@ -51,8 +50,8 @@ public class Mission implements Serializable {
 		return name;
 	}
 
-	public String setName(String name) {
-	return	this.name = name;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getDescription() {
@@ -86,6 +85,10 @@ public class Mission implements Serializable {
 				+ ", getDescription()=" + getDescription() + ", getDepartement()=" + getDepartement()
 				+ ", getTimesheets()=" + getTimesheets() + "]";
 	}
+	
+
+
+	
 
 	
 
