@@ -3,7 +3,7 @@ pipeline {
 stages {
 stage("Cloning Project from Git") {
 steps { 
-git branch: 'Mouadh' , url: 'https://github.com/adem-sys/devops.git'
+git branch: 'Mouadh' , credentialsId: 'GitM', url: 'https://github.com/adem-sys/devops.git'
 }
 }
 stage("Build") {
