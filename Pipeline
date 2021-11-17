@@ -1,0 +1,45 @@
+pipeline {
+    agent any
+stages {
+stage("Cloning Project from Git") {
+steps { 
+git branch: 'Mouadh', credentialsId: 'GitCredentials', url: 'https://github.com/adem-sys/devops.git'
+}
+}
+stage("Build") {
+steps {
+bat "mvn compile"
+}}
+stage("Unit tests") {
+steps {
+bat "mvn test"
+}}
+
+stage("Code Quality") {
+steps {
+bat "mvn sonar:sonar"
+}}
+
+stage("Clean- Package"){
+steps {
+bat "mvn clean package"
+}}
+
+stage("DEPLOY with Nexus") {
+steps {
+
+bat "mvn deploy:deploy-file -DgroupId=tn.esprit.spring -DartifactId=timesheet -Dversion=2.0 -DgeneratePom=true -Dpackaging=jar -DrepositoryId=deploymentRepo -Durl=http://localhost:8081/repository/maven-releases/ -Dfile=target/timesheet-2.0.jar -DskipTests"
+}}
+
+      
+}
+    
+    post {
+        success {
+    emailext attachLog: true, body: '''End of Pipeline
+Finished: SUCCESS''', subject: '#Success', to: 'm3yadx9@gmail.com'}
+    failure  {
+    emailext attachLog: true, body: '''End of Pipeline
+Finished: FAILURE''', subject: '#Failure', to: 'm3yadx9@gmail.com'}
+    } 
+}
